@@ -2,15 +2,12 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 
-client.on("message", (message) => {
-  if (!message.content.startsWith(config.prefix) || message.author.bot) return;
- 
-  if (message.content.startsWith(config.prefix + "ping")) {
-    message.channel.send("pong!");
-  } else
-  if (message.content.startsWith(config.prefix + "foo")) {
-    message.channel.send("bar!");
-  }
+client.on("ready", () => {
+  // This event will run if the bot starts, and logs in, successfully.
+  console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
+  // Example of changing the bot's playing game to something useful. `client.user` is what the
+  // docs refer to as the "ClientUser".
+  client.user.setActivity(`Serving ${client.guilds.size} servers`);
 });
-
+  
 client.login(process.env.BOT_TOKEN);
